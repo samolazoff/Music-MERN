@@ -5,7 +5,7 @@ import Home from '../../pages/Home/Home';
 import LoginPage from '../../pages/LoginPage/LoginPage';
 import RegistrPage from '../../pages/RegistrPage/RegistrPage';
 
-import './App.css';
+import './App.scss';
 
 
 function App() {
