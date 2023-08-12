@@ -79,8 +79,25 @@ export const login = async (req, res) => {
 
 export const getMe = async (req, res) => {
     try {
-        
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.json({
+                message: "No such user exists"
+            })
+        };
+        const token = jwt.sign(
+            {id: user.id},
+            process.env.JWT_SECRET,
+            {expiresIn: '30d'}
+        );
+        res.json({
+            user,
+            token
+        })
     } catch (error) {
+        res.json({
+            message: 'No access!!!'
+        });
         console.log(error);
     }
 };
