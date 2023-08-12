@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
     try {
@@ -37,10 +38,43 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
+        const {username, password} = req.body;
+        const user = await User.findOne({username});
+
+        if (!user){
+            return res.json({
+                message: 'Username is not defaund!!!'
+            });
+        };
         
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+        if(!isPasswordCorrect){
+            res.json({
+                message: 'Password is wrong!!!'
+            });
+        };
+
+        const token = jwt.sign(
+            {
+            id: user.id,
+            username: user.username
+            },
+            process.env.JWT_SECRET,
+            {expiresIn: '30d'}
+        );
+        res.json({
+            token,
+            user,
+            message: 'You are sistem'
+        })
+
     } catch (error) {
+        res.json({
+            message: 'Mistak of login!!!'
+        });
         console.log(error);
-    }
+    };
 };
 
 export const getMe = async (req, res) => {
