@@ -1,6 +1,8 @@
 import React from 'react';
 import {NavLink } from 'react-router-dom';
 
+import Burger from '../Burger/Burger';
+
 const links = [
     // title, href, isAuth, !isAuth
     ['home', '/', true, true],
@@ -16,7 +18,8 @@ const Navbar = () => {
     const isAuth= true;
 
     return (
-        <nav className="app-navbar h-20">
+        <nav className="app-nav h-20 flex">
+            <Burger></Burger>
             <ul className=' flex flex-row justify-end gap-5 items-center uppercase h-full'>
                 {
                     links.map((link, index)=>{

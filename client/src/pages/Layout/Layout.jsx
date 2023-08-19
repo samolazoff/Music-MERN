@@ -1,23 +1,22 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Navbar from '../../components/navbar/Navbar';
-import Logo from '../../components/logo/Logo';
+import Header from '../../components/Header/Header';
+
+import './Layout.scss';
 
 const Layout = () => {
+
     return (
         <div className='app flex flex-col justify-start items-center'>
-            <header className="app-header bg-bgc-1 w-full text-txtc-1">
-                <div className="container m-auto flex justify-between items-center">
-                    <Logo> Logo</Logo>
-                    <Navbar></Navbar>
-                </div>
-            </header>
+           <Header></Header>
             <main className="app-main">
                 <Outlet></Outlet>
             </main>
             <footer className="app-footer">
-                footer
+                <script>
+                    
+                </script>
             </footer>            
         </div>
     );
